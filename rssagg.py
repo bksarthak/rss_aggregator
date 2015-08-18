@@ -8,6 +8,11 @@ def feedagg():
  getrec(msft)
  getrec(cert)
 
+def createpick(stream):
+ pickle.dump([stream.entries[0].title],open(stream+".p",'wb')
+ return pickle.load(open(stream+'.p','rb')) 
+ 
+
  
 def getrec(stream):
  if stream.bozo:
@@ -15,11 +20,10 @@ def getrec(stream):
   exc = stream.bozo_exception
   print (exc.getMessage())
  else:
-  #put first record for update check -- to be implemented later WIP
-  first_record = ([stream.entries[0].title])
- #compare first record of feed and the tuple to check for new updates 
+  pickread = createpick(stream)
+ #compare first record of feed and the pickle to check for new updates 
   for post in stream.entries:
-   if first_record[0] == post.title:
+   if pickread == post.title:
     print('no new updates from %s',str(stream))
    else:
     print (post.title+":"+post.link+"\n")
