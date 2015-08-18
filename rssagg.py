@@ -10,7 +10,6 @@ def feedagg():
 
 def createpick(stream):
  pickle.dump([stream.entries[0].title],open(stream+".p",'wb')
- return pickle.load(open(stream+'.p','rb')) 
  
 
  
@@ -20,7 +19,8 @@ def getrec(stream):
   exc = stream.bozo_exception
   print (exc.getMessage())
  else:
-  pickread = createpick(stream)
+  pickwrite = createpick(stream)
+  readpick = pickle.load(open(stream+'.p','r')
  #compare first record of feed and the pickle to check for new updates 
   for post in stream.entries:
    if pickread == post.title:
