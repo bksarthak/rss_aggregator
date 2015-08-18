@@ -23,7 +23,7 @@ def getrec(stream):
   readpick = pickle.load(open(stream+'.p','r')
  #compare first record of feed and the pickle to check for new updates 
   for post in stream.entries:
-   if pickread == post.title:
+   if readpick == post.title:
     print('no new updates from %s',str(stream))
    else:
     print (post.title+":"+post.link+"\n")
